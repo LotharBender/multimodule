@@ -7,13 +7,13 @@
   "workspaces": [
     "books",
     "customers",
-    "orders",
-    "database"
+    "orders"
   ],
   "dependencies": {
     "@sap/cds": "^7",
-    "express": "^4",
+    "@sap/cds-mtxs": "^1.9",
     "@sap/xssec": "^3",
+    "express": "^4",
     "passport": "^0"
   },
   "devDependencies": {
@@ -24,10 +24,30 @@
     "start": "cds-serve"
   },
   "cds": {
+    "build": {
+      "tasks": [
+        { "for": "hana", "options": { "ws": true } },
+        { "for": "mtx-sidecar", "options": { "ws": true } }
+      ]
+    },
     "requires": {
+      "db": {
+        "kind": "sqlite",
+        "impl": "@cap-js/sqlite",
+        "credentials": {
+          "url": "../db.sqlite"
+        }
+      },
       "[production]": {
-        "auth": "xsuaa"
-      }
-    }
+        "auth": "xsuaa",
+        "db": {
+          "kind": "hana"
+        }
+      },
+      "auth": "xsuaa",
+      "toggles": true,
+      "multitenancy": true
+    },
+    "profile": "with-mtx-sidecar"
   }
 }
