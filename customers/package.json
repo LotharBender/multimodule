@@ -31,6 +31,7 @@
         "auth": "xsuaa",
         "db": "hana"
       },
+      "multitenancy": true,
       "toggles": true
     }
   }

@@ -10,9 +10,9 @@ build-parameters:
     - builder: custom
       commands:
         - cds build --production
-        - npx cds build ./books --for nodejs --production
-        - npx cds build ./customers --for nodejs  --production
-        - npx cds build ./orders --for nodejs  --production
+        - npx cds build ./books
+        - npx cds build ./customers
+        - npx cds build ./orders
 
 modules:
   - name: books-srv
@@ -90,11 +90,9 @@ modules:
         properties:
           mtx-url: ${default-url}
     requires:
-      - name: multimodule-auth
       - name: multimodule-registry
       - name: multimodule-db
-      - name: orders-auth
-
+      
 resources:
   - name: database-auth
     type: org.cloudfoundry.managed-service
